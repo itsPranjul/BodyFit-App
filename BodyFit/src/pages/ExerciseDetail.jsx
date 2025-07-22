@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
+import { Helmet } from "react-helmet"
 
 import { useExercisesData } from "../contexts/ExercisesDataContext"
 
@@ -47,6 +48,15 @@ const ExerciseDetail = () => {
 
   return (
     <div>
+      {exerciseDetail?.name && (
+      <Helmet>
+        <title>{`${exerciseDetail.name} - BodyFit`}</title>
+        <meta
+          name="description"
+          content={`Learn how to perform ${exerciseDetail.name} targeting your ${exerciseDetail.target}. Strengthen your ${exerciseDetail.bodyPart} with this ${exerciseDetail.equipment}-based exercise.`}
+        />
+      </Helmet>
+    )}
       <Detail exerciseDetail={exerciseDetail} />
       <ExerciseVideos exerciseVideos={exerciseVideos} name={exerciseDetail.name} />
       <SimilarExercises targetMuscleExercises={targetMuscleExercises} equipmentExercises={equipmentExercises} />
